@@ -1,0 +1,61 @@
+# Allows for user to be specified in seperate file, which is ignored by .gitignore
+# for machine specific git user accounts
+[include]
+  path = ~/.gituser
+
+[color]
+  ui = auto
+[core]
+  excludesFile = ~/.gitignore_global
+  editor = vimdiff
+[alias]
+  # Aliases borrowed heavily from:
+  # https://github.com/garybernhardt/dotfiles/blob/master/.gitconfig
+  st = status
+  ci = commit
+  cin = commit -m 'add notes'
+  co = checkout
+  com = checkout master
+  di = diff
+  dc = diff --cached
+  ff = merge --ff-only
+  amend = commit --amend
+  pom = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+  head = show HEAD
+  prp = pull --rebase --prune
+  wip = "!git add --all && git ci -m WIP"
+
+  # fetch-all => fetch & prune origin and upstream
+  fa = "!git fetch origin --prune && git remote | grep upstream > /dev/null && git fetch upstream --prune"
+
+  # Delete remote branch
+  delete-remote-branch = !git push origin --delete
+
+  # Delete remote tag
+  # git tag -d release01
+  # git push origin :refs/tags/release01
+
+  tags = tag -n10
+
+  # Fancy logging.
+  #   r = recent commits, only current branch
+  #   ra = recent commits, all reachable refs
+  #   l = all commits, only current branch
+  #   la = all commits, all reachable refs
+  r = !git l -30
+  ra = !git r --all
+
+  # Source of bashrc require'd  to access functions in .bash/<platform>/aliases
+  # Ideally this would be less heavy handed
+  #l = "!source ~/.githelpers && source ~/.bash.platform && pretty_git_log"
+  #la = !git l --all
+
+  # Branch Output
+  #b = "!~/bin/gbrt"
+  #bc = "!~/bin/branch-clean"
+[color "diff"]
+  whitespace = red reverse
+[difftool]
+  prompt = false
+[mergetool]
+  prompt = false

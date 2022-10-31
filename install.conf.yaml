@@ -1,3 +1,10 @@
 - link:
     ~/.gitconfig:
       force: true
+      path: .gitconfig
+    ~/.gituser:
+      force: true
+      path: .gituser
+    ~/.gitignore_global:
+      force: true
+      path: .gitignore_global
