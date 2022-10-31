@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ "${CODESPACES:-}" == 'true' ]]; then
+  echo "=== Installing utilities ==="
+  sudo apt-get -y update
+  sudo apt-get install -y \
+	ack
+fi
