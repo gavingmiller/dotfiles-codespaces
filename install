@@ -7,17 +7,17 @@ if test -f "$init_marker"; then
   return 0
 fi
 
-# Bring in codespaces environment
-source "./codespaces/install"
-
 # Boilerplate dotbot script below
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 cd "${BASEDIR}"
+
+# Bring in codespaces environment
+source "./codespaces/install"
+
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
