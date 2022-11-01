@@ -19,7 +19,7 @@ if [[ "${CODESPACES:-}" == 'true' ]]; then
   echo "=== Removing RVM ==="
   # From https://stackoverflow.com/a/25571648/33226
   # May be additional steps required, review SO answer if needed
-  if ! command -v rvm &> /dev/null
+  if command -v rvm &> /dev/null
   then
 	  sudo /usr/local/rvm/bin/rvm implode --force 2>&1 >/dev/null
   fi
