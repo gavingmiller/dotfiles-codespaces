@@ -139,6 +139,9 @@ augroup vimrcEx
   autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
+  " yaml handling
+  au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+
   " *.pdf.erb files don't have html_indent_tags defined
   if exists("g:html_indent_tags")
     " Indent p tags
