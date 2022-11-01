@@ -101,27 +101,3 @@ else
 fi
 
 echo "Fix if you see this run during a command invocation. This should only run on first login."
-
-# TODO move this into it's own file, and run only once
-# TODO fix colors in terminal
-if [[ "${CODESPACES:-}" == 'true' ]]; then
-  init_marker=$HOME/.make.initialize
-  if test -f "$init_marker"; then
-	return 0
-  fi
-
-  # initialize github ssh
-  ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
-
-  # From https://stackoverflow.com/a/25571648/33226
-  # May be additional steps required, review SO answer if needed
-  sudo /usr/local/rvm/bin/rvm implode --force 2>&1 >/dev/null
-  rm -rf /usr/local/rvm
-  sudo rm -f /etc/profile.d/rvm.sh
-  sudo rm -f /etc/rvmrc
-  sudo rm -f ~/.rvmrc
-
-  # TODO move marker to make.initialize.sh script
-  /workspaces/.codespaces/.persistedshare/dotfiles/make.initialize.sh
-  touch "$init_marker"
-fi

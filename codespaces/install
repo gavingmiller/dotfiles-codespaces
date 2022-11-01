@@ -1,8 +1,29 @@
 #!/usr/bin/env bash
 
 if [[ "${CODESPACES:-}" == 'true' ]]; then
+  echo "=== Initializing codespaces ==="
+  init_marker=$HOME/.make.initialize
+  if test -f "$init_marker"; then
+	echo "=== Init marker detected, skipping init ==="
+	return 0
+  fi
+
   echo "=== Installing utilities ==="
   sudo apt-get -y update
   sudo apt-get install -y \
 	ack
+
+  echo "=== Initialize github ssh ==="
+  ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+
+  echo "=== Removing RVM ==="
+  # From https://stackoverflow.com/a/25571648/33226
+  # May be additional steps required, review SO answer if needed
+  sudo /usr/local/rvm/bin/rvm implode --force 2>&1 >/dev/null
+  sudo rm -rf /usr/local/rvm
+  sudo rm -f /etc/profile.d/rvm.sh
+  sudo rm -f /etc/rvmrc
+  sudo rm -f ~/.rvmrc
+
+  touch "$init_marker"
 fi
