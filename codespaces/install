@@ -12,6 +12,7 @@ if [[ "${CODESPACES:-}" == 'true' ]]; then
   sudo apt-get -y update
   sudo apt-get install -y \
 	ack \
+	vim \
 	ruby
 
   echo "=== Initialize github ssh ==="
