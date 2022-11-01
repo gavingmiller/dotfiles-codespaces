@@ -1,5 +1,4 @@
 # dotfiles-codespaces
 
-An attempt to re-build my dotfiles so they work on codespaces
+Working correctly, next step is to diff against original dotfiles, and merge this repo over there
 
-* starts from scorched earth, and build back up
