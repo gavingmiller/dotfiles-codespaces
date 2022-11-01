@@ -11,7 +11,8 @@ if [[ "${CODESPACES:-}" == 'true' ]]; then
   echo "=== Installing utilities ==="
   sudo apt-get -y update
   sudo apt-get install -y \
-	ack
+	ack \
+	ruby
 
   echo "=== Initialize github ssh ==="
   ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null

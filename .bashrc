@@ -100,8 +100,4 @@ else
   fi
 fi
 
-if [[ "${CODESPACES:-}" == 'true' ]]; then
-  /workspaces/.codespaces/.persistedshare/dotfiles/install
-fi
-
 echo "Fix if you see this run during a command invocation. This should only run on first login."

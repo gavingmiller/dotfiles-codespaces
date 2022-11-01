@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""
-" Gavin's New Vimrc
+" Gavin Miller's Vimrc
 " Adapted from https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""
 
