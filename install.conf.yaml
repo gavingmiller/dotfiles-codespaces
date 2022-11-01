@@ -17,6 +17,9 @@
     ~/.pryrc:
       force: true
       path: .pryrc
+    ~/.vim:
+      force: true
+      path: .vim
     ~/.vimrc:
       force: true
       path: .vimrc
