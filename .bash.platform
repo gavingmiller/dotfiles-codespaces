@@ -11,3 +11,10 @@ then
   PS1="\t \W\$(grb_git_prompt)\$(job_count)\$ "
 fi
 
+
+if [[ "${CODESPACES:-}" == 'true' ]]; then
+then
+  alias dotfiles='cd /workspaces/.codespaces/.persistedshare/dotfiles'
+else
+  alias dotfiles='cd ~/.dotfiles'
+fi

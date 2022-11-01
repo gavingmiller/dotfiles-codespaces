@@ -15,8 +15,6 @@ fi
 alias bi='bundle install'
 alias bu='bundle update'
 
-alias gimmie-aws-creds='gimme-aws-creds'
-
 # Customize the command line
 function minutes_since_last_commit {
   now=`date +%s`
