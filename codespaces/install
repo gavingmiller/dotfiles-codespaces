@@ -2,9 +2,9 @@
 
 if [[ "${CODESPACES:-}" == 'true' ]]; then
   echo "=== Initializing codespaces ==="
-  init_marker=$HOME/.make.initialize
+  init_marker=$HOME/.codespace.initialize
   if test -f "$init_marker"; then
-	echo "=== Init marker detected, skipping init ==="
+	echo "=== Codespace marker detected, skipping init ==="
 	return 0
   fi
 
@@ -28,5 +28,6 @@ if [[ "${CODESPACES:-}" == 'true' ]]; then
   sudo rm -f /etc/rvmrc
   sudo rm -f ~/.rvmrc
 
+  # Mark that codespaces has been initialized
   touch "$init_marker"
 fi

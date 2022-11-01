@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+init_marker=$HOME/.dotbot.initialize
+if test -f "$init_marker"; then
+  echo "=== Init marker detected, skipping init ==="
+  return 0
+fi
+
 # Bring in codespaces environment
 source "./codespaces/install"
 
@@ -19,3 +25,6 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 # Switch to bash shell by default
 sudo chsh -s $(which bash) $(whoami)
+
+# Mark that dotbot has been initialized
+touch "$init_marker"
