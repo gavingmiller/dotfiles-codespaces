@@ -301,9 +301,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>T :call RunTestFile()<cr>
 map <leader>t :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -313,14 +310,16 @@ function! RunTestFile(...)
   endif
 
   " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|.test.ts\)$') != -1
+
+  " Run the tests for the previously-marked file (or the current file if
+  " it's a test).
   if in_test_file
-    call SetTestFile()
-  elseif
-    !exists("t:grb_test_file")
+	call SetTestFile(command_suffix)
+  elseif !exists("t:grb_test_file")
     return
   end
-  call RunTests(t:grb_test_file . command_suffix)
+  call RunTests(t:grb_test_file)
 endfunction
 
 function!  RunNearestTest()
@@ -330,28 +329,43 @@ endfunction
 
 function! SetTestFile()
   " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
+  let t:grb_test_file=@% . a:command_suffix
 endfunction
 
 function! RunTests(filename)
   " Write the file and run tests for the given filename
-  :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
-  else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color --format documentation " . a:filename
-    else
-      exec ":!rspec --color --format documentation " . a:filename
-    end
+  if expand("%") != ""
+	:w
+  end
+  " The file is executable; assume we should run
+  if executable(a:filename)
+	exec ":!./" . a:filename
+  " Project-specific test script
+  elseif filereadable("bin/test")
+	exec ":!bin/test " . a:filename
+  " Rspec binstub
+  elseif filereadable("bin/rspec")
+	exec ":!bin/rspec " . a:filename
+  " Fall back to the .test-commands pipe if available, assuming someone
+  " is reading the other side and running the commands
+  elseif filewritable(".test-commands")
+	let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
+	exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
+
+	" Write an empty string to block until the command completes
+	sleep 100m " milliseconds
+	:!echo > .test-commands
+	redraw!
+  " Fall back to a blocking test run with Bundler
+  elseif filereadable("bin/rspec")
+	exec ":!bin/rspec --color --format documentation " . a:filename
+  elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
+	exec ":!bundle exec rspec --color --format documentation " . a:filename
+  elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
+	exec ":!bin/rails test " . a:filename
+  " If we see python-looking tests, assume they should be run with Nose
+  elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
+	exec "!nosetests " . a:filename
   end
 endfunction
 
