@@ -1,4 +1,25 @@
 - link:
+    ~/bin:
+      force: true
+      path: bin
+    ~/.ackrc:
+      force: true
+      path: .ackrc
+    ~/.bash:
+      force: true
+      path: .bash
+    ~/.bash.platform:
+      force: true
+      path: .bash.platform
+    ~/.bashrc:
+      force: true
+      path: .bashrc
+    ~/.bash_profile:
+      force: true
+      path: .bash_profile
+    ~/.config:
+      force: true
+      path: .config
     ~/.gitconfig:
       force: true
       path: .gitconfig
@@ -8,6 +29,9 @@
     ~/.gitignore_global:
       force: true
       path: .gitignore_global
+    ~/.githelpers:
+      force: true
+      path: .githelpers
     ~/.rspec:
       force: true
       path: .rspec

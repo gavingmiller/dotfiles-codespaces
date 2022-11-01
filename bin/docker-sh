@@ -1,0 +1,9 @@
+#!/bin/sh
+# Usage:
+#   docker-sh <image-id>
+#
+# For legacy builds, run 'export DOCKER_BUILDKIT=0'
+# This is the only way to get intermediate images right now for failed builds.
+# See: https://github.com/moby/buildkit/issues/1472
+
+docker run --rm -it --entrypoint /bin/bash $1

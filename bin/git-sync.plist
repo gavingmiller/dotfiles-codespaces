@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>miller.gavin.git.sync</string>
+
+    <key>OnDemand</key>
+    <false/>
+
+	<key>LaunchOnlyOnce</key>
+	<true/>
+
+    <key>UserName</key>
+    <string>gmiller</string>
+
+    <key>GroupName</key>
+    <string>staff</string>
+
+    <key>ProgramArguments</key>
+    <array>
+            <string>/Users/gmiller/.dotfiles/bin/git-sync</string>
+    </array>
+</dict>
+</plist>

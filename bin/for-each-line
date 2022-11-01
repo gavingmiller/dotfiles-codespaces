@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+
+if ARGV.length < 2
+  puts "Usage: for-each-line <file> <command>"
+  exit 0
+end
+
+file = ARGV.first
+command = ARGV[1..-1].join(" ")
+
+File.readlines(file).each do |line|
+  line = line.chomp
+
+  if command.include?("<in>")
+    puts `#{command.gsub("<in>", line)}`
+  else
+    puts `#{command} #{line}`
+  end
+end
+
+exit 0

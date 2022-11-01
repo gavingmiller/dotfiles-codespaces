@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require 'base64'
+
+puts ARGV[0]
+header, payload, signature = ARGV[0].split(".")
+
+[header, payload, signature].each do |segment|
+  puts segment
+  puts Base64.decode64(segment)
+  puts ""
+end
+
+exit 0
