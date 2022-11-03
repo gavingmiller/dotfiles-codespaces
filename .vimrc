@@ -327,7 +327,7 @@ function!  RunNearestTest()
   call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
-function! SetTestFile()
+function! SetTestFile(command_suffix)
   " Set the spec file that tests will be run for.
   let t:grb_test_file=@% . a:command_suffix
 endfunction

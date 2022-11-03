@@ -14,6 +14,7 @@ fi
 # Bundler
 alias bi='bundle install'
 alias bu='bundle update'
+alias cs-ssh"gh cs ssh --codespace $(gh cs list | grep `basename $(pwd)` | cut -f1)"
 
 # Customize the command line
 function minutes_since_last_commit {
