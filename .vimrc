@@ -340,12 +340,9 @@ function! RunTests(filename)
   " The file is executable; assume we should run
   if executable(a:filename)
 	exec ":!./" . a:filename
-  " Project-specific test script
-  elseif filereadable("bin/test")
-	exec ":!bin/test " . a:filename
   " Rspec binstub
   elseif filereadable("bin/rspec")
-	exec ":!bin/rspec " . a:filename
+	exec ":!bin/rspec --color --format documentation " . a:filename
   " Fall back to the .test-commands pipe if available, assuming someone
   " is reading the other side and running the commands
   elseif filewritable(".test-commands")
