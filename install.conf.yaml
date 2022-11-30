@@ -48,11 +48,17 @@
       force: true
       path: .vimrc
 
+- brew:
+    - git
+    - vim
+
 - shell:
     - git -C "$HOME/.vim/bundle/Vundle.vim" pull || git clone "https://github.com/VundleVim/Vundle.vim" "$HOME/.vim/bundle/Vundle.vim"
     - git -C "$HOME/.vim/bundle/ack.vim" pull || git clone "https://github.com/mileszs/ack.vim" "$HOME/.vim/bundle/ack.vim"
     - git -C "$HOME/.vim/bundle/ctrlp.vim" pull || git clone "https://github.com/ctrlpvim/ctrlp.vim" "$HOME/.vim/bundle/ctrlp.vim"
-    - git -C "$HOME/.vim/bundle/indentLine" pull || git clone "https://github.com/Yggdroot/indentLine" "$HOME/.vim/bundle/indentLine"
+    - rm -rf "$HOME/.vim/bundle/indentLine"
+    - git clone "https://github.com/Yggdroot/indentLine" "$HOME/.vim/bundle/indentLine"
+    - cd "$HOME/.vim/bundle/indentLine" && git checkout 7753505f3c500ec88d11e9373d05250f49c1d900
     - git -C "$HOME/.vim/bundle/python.vim" pull || git clone "https://github.com/vim-scripts/python.vim" "$HOME/.vim/bundle/python.vim"
     - git -C "$HOME/.vim/bundle/typescript-vim" pull || git clone "https://github.com/leafgarland/typescript-vim" "$HOME/.vim/bundle/typescript-vim"
     - git -C "$HOME/.vim/bundle/vim-bundler" pull || git clone "https://github.com/tpope/vim-bundler" "$HOME/.vim/bundle/vim-bundler"
