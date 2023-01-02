@@ -400,7 +400,7 @@ set wildignore+=*/build/*,*/tmp/*,*.git/*,*/log/*,*/dev-docs/*
 
 " rails
 set wildignore+=*/vendor/*,*/public/*,*/coverage/*,*/node_modules/*
-set wildignore+=*/private_gems/*,*/client-src/*,*/microservices/*,*/vcr_cassettes/*
+set wildignore+=*/client-src/*,*/microservices/*,*/vcr_cassettes/*
 set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.ttf,*.tga,*.dds,*.ico,*.eot,*.pdf,*.swf,*.jar,*.zip
 set wildignore+=*/db/seeds.rb
 
