@@ -49,6 +49,7 @@
       path: .vimrc
 
 - brew:
+    - ag    # used by vim for file indexing
     - git
     - vim
 
